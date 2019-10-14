@@ -1,5 +1,9 @@
 # ZO-minmax
 
+Code for paper:
+
+
+Sijia Liu\* , Songtao Lu\* , Xiangyi Chen\* , Yao Feng\* , Kaidi Xu\* , Abdullah Al-Dujaili\* , Minyi Hong Una-May Obelilly, ["Min-Max Optimization without Gradients: Convergence and Applications to Adversarial ML"](https://arxiv.org/pdf/1909.13806.pdf), (\* Equal Contribution)
 
 Prerequisites
 -----------------------
