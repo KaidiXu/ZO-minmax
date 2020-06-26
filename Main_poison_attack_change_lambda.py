@@ -1150,6 +1150,10 @@ if __name__ == "__main__":
     run_flag = 1
     lambda_x_list = [1e-5,1e-4,1e-3,1e-2,1e-1,1,100]
     Data_path = os.path.dirname(os.path.realpath(__file__)) + "/data_4_2"
+    if not os.path.exists(Data_path):
+        os.makedirs(Data_path)
+    if not os.path.exists(os.path.dirname(os.path.realpath(__file__))+"/Results_figures"):
+        os.makedirs(os.path.dirname(os.path.realpath(__file__))+"/Results_figures")
     if run_flag:
         n_tr = 1000
     

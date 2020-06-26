@@ -50,6 +50,44 @@ def generate_data(data, id, target_label):
 
     return inputs, target_vec
 
+
+def generate_data_classes(data, id, number, model):
+    inputs = []
+    target_vec = []
+
+    for indx in id:
+        count = 0
+        for d, l in zip(data.test_data, data.test_labels):
+            if np.argmax(l) == indx:
+                _, p = model_prediction_u(model,d.reshape(1,32,32,3))
+                if p[0] != np.argmax(l):
+                    continue
+                inputs.append(d)
+                count += 1
+                if count == number:
+                    break
+
+    inputs = np.array(inputs)
+
+    return inputs
+
+
+def generate_data_classes_mnist(data, id, number):
+    inputs = []
+    target_vec = []
+
+    for indx in id:
+        count = 0
+        for d, l in zip(data.test_data, data.test_labels):
+            if np.argmax(l) == indx:
+                inputs.append(d)
+                count += 1
+                if count == number:
+                    break
+
+    inputs = np.array(inputs)
+
+    return inputs
 # def softmax(x):
 #     return np.exp(x) / np.exp(x).sum(axis=1)
 
@@ -70,35 +108,37 @@ def model_prediction_u(model, inputs):
     predicted_class = np.argmax(prob,1)
     return prob, predicted_class
 
-def bisection(a,eps,xi,ub=1):
+
+def bisection(a, eps, xi, ub=1):
     pa = np.clip(a, 0, ub)
     if np.sum(pa) <= eps:
         print('np.sum(pa) <= eps !!!!')
         w = pa
     else:
-        mu_l = np.min(a-1)
+        mu_l = np.min(a - 1)
         mu_u = np.max(a)
-        #mu_a = (mu_u + mu_l)/2
-        while np.abs(mu_u - mu_l)>xi:
-            #print('|mu_u - mu_l|:',np.abs(mu_u - mu_l))
-            mu_a = (mu_u + mu_l)/2
-            gu = np.sum(np.clip(a-mu_a, 0, ub)) - eps
-            gu_l = np.sum(np.clip(a-mu_l, 0, ub)) - eps
-            #print('gu:',gu)
-            if gu == 0: 
+        mu_a = (mu_u + mu_l)/2
+        while np.abs(mu_u - mu_l) > xi:
+            # print('|mu_u - mu_l|:',np.abs(mu_u - mu_l))
+            mu_a = (mu_u + mu_l) / 2
+            gu = np.sum(np.clip(a - mu_a, 0, ub)) - eps
+            gu_l = np.sum(np.clip(a - mu_l, 0, ub)) - eps
+            # print('gu:',gu)
+            if gu == 0:
                 print('gu == 0 !!!!!')
                 break
             if np.sign(gu) == np.sign(gu_l):
                 mu_l = mu_a
             else:
                 mu_u = mu_a
-            
-        w = np.clip(a-mu_a, 0, ub)
-        
+
+        w = np.clip(a - mu_a, 0, ub)
+
     return w
+
 
 def stationary_gap(delta1, delta2, alpha, weight1, weight2, beta):
     d = np.linalg.norm(delta1 - delta2) ** 2
     w = np.linalg.norm(weight1 - weight2) ** 2
-    #return np.sqrt((1/alpha)*d + (1/beta)*w) 
-    return np.sqrt(d + w) 
+    # return np.sqrt((1/alpha)*d + (1/beta)*w)
+    return np.sqrt(d + w)

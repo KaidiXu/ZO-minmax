@@ -3,7 +3,7 @@
 Code for paper:
 
 
-Sijia Liu\* , Songtao Lu\* , Xiangyi Chen\* , Yao Feng\* , Kaidi Xu\* , Abdullah Al-Dujaili\* , Minyi Hong Una-May Obelilly, ["Min-Max Optimization without Gradients: Convergence and Applications to Adversarial ML"](https://arxiv.org/pdf/1909.13806.pdf), (\* Equal Contribution)
+Sijia Liu\* , Songtao Lu\* , Xiangyi Chen\* , Yao Feng\* , Kaidi Xu\* , Abdullah Al-Dujaili\* , Minyi Hong and Una-May O’Reilly, ["Min-Max Optimization without Gradients: Convergence and Applications to Adversarial ML"](https://arxiv.org/pdf/1909.13806.pdf), (\* Equal Contribution)
 
 Prerequisites
 -----------------------
@@ -55,7 +55,10 @@ Black-box  poisoning  attack  against  logistic  regression  model
 
 run 
 ```
-python3 Main_poison_attack.py
+python Main_poison_attack.py
+```
+```
+python Main_poison_attack_change_lambda.py
 ```
 
 Compare stable point
@@ -63,5 +66,6 @@ Compare stable point
 
 run 
 ```
-python3 Main_comparison_STABLEOPT
+python Main_comparison_STABLEOPT.py
 ```
+

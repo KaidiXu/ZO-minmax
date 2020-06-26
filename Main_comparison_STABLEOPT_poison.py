@@ -1365,6 +1365,10 @@ if __name__ == "__main__":
     n_tr = 1000
     Data_path = os.path.dirname(os.path.realpath(__file__)) + "/data_4_2"
     figurepath= os.path.dirname(os.path.realpath(__file__))+ "/Results_figures"
+    if not os.path.exists(Data_path):
+        os.makedirs(Data_path)
+    if not os.path.exists(figurepath):
+        os.makedirs(figurepath)
     D_x = 100
     x_gt = 1 * np.ones(D_x)
     sigma2 = 1

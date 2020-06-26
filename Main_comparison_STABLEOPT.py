@@ -799,8 +799,8 @@ def compare(dimension,epsilon,data_point_num, select_point_num, noise,datapath,f
         STABLEOPT_iter_x=data["STABLEOPT_iter_x"]
         #print(STABLEOPT_iter_x)
         x0=STABLEOPT_iter_x[0]
-        STABLEOPT_iter_x=[]
-        STABLEOPT_time=[]
+        STABLEOPT_iter_x=data["STABLEOPT_iter_x"]
+        STABLEOPT_time=data["STABLEOPT_time"]
     print("AG method")
     #time_start=time.time()
     x_opt,AG_iter_x,AG_time=AG_run(f_AG,x0,y0,step=[0.05,0.05],lr=[0.1,0.1],dis_fun=distance_fun, epsilon=epsilon,datapath=datapath,iter=select_point_num,inner_iter=q)
@@ -959,6 +959,10 @@ if __name__=="__main__":
     my_path = os.path.dirname(os.path.realpath(__file__))
     datapath=my_path+"/data_applendix"
     figurepath=my_path+"/figure_applendix"
+    if not os.path.exists(datapath):
+        os.makedirs(datapath)
+    if not os.path.exists(figurepath):
+        os.makedirs(figurepath)
     random.seed(212)
     select_point_num=50
     iter_STABLEOPT=500

@@ -1090,10 +1090,14 @@ if __name__=="__main__":
     lr_delta = 0.02 ### 0.02
 
     ############## Part I: data generation   ######################
-    flag_dataGeneration = 0
+    flag_dataGeneration = 1
     flag_dataLoad = 1
     Data_filename = "D_4_2_SL"
     Data_path = os.path.dirname(os.path.realpath(__file__))+"/data_4_2"
+    if not os.path.exists(Data_path):
+        os.makedirs(Data_path)
+    if not os.path.exists(os.path.dirname(os.path.realpath(__file__))+"/Results_figures"):
+        os.makedirs(os.path.dirname(os.path.realpath(__file__))+"/Results_figures")
     if flag_dataGeneration:
         generate_data(n_tr, sigma2, x_gt, noise_std, Data_path, Data_filename)
         train_data, train_poison_data, train_clean_data, test_data = generate_train_and_test_data(train_ratio, poison_ratio, Data_path,  Data_filename, True)
@@ -1110,7 +1114,7 @@ if __name__=="__main__":
     # ### full batch
     # index = index_batch.copy()
     ############## Part II: poisoning attack learning for different q, lambda, multiple trials
-    flag_train = 0
+    flag_train = 1
     lambda_x =  [1e-3]  #[1e-3, 1e-2]
     q_vec = [1,5,10,20] #30 # ### multiple random direction vectors
     n_trials = 10 #3
@@ -1180,8 +1184,8 @@ if __name__=="__main__":
 
 
     ############## Part III: poisoning attack learning versus different poisoning ratios
-    flag_poison_ratio_test = 0
-    flag_dataGeneration_multiple = 0
+    flag_poison_ratio_test = 1
+    flag_dataGeneration_multiple = 1
     # flag_dataLoad_multiple = 0
 
     flag_plot_poisonRatio = 1
